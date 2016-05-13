@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8"/>
+	
+	<h:outputStylesheet library="pensao" name="estilo.css" />
+	<ui:insert name="script" />
+	
+	
+		
+	
+</h:head>
+<h:body>
+
+	<header>
+		<h:graphicImage library="pensao" name="logo.png" />
+	</header>
+	
+	<div id="conteudo">
+		<ui:insert name="corpo" />
+	</div>
+	
+	<footer>
+		Workshop online "Começando com PrimeFaces / JSF"
+	</footer>
+	
+	<!-- Janela de confirma para todas as telas -->
+	<h:form>
+		<p:confirmDialog global="true">
+			<p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			<p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+		</p:confirmDialog>
+	</h:form>
+
+</h:body>
+</html>

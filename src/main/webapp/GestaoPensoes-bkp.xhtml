@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="script">
+		<script>
+			function handlerPDialogCreateEnterprise(){
+				alert('Teste');
+				if (!args.validationFailed) { 
+					PF('edicaoEmpresaDialog').hide();
+				}
+			}
+		</script>
+	</ui:define>
+	
+	<ui:define name="corpo">
+		
+		
+		<f:metadata>
+			<f:viewAction action="#{gestaoPensoesBean.consultar}" />
+		</f:metadata>
+	
+		<h1>Cadastro de Pensoes</h1>
+	
+		<h:form id="frm">
+		
+			<p:messages id="msgs"/>
+			
+			<p:toolbar id="toolbar">
+				
+				<f:facet name="left">
+					<!--process: Está como @this para processar somente esse componente (p:commandButton).
+						oncomplete: Assim que o processamento do componente é feito ele chama um JS do primefaces para mostrar o p:dialog pelo ID
+						update: Atualizar o dialog, no prepararNovoCadastro vc fez a instancia de uma empresa nova (limpa) dai vc força a atualizacao
+					-->
+					<p:commandButton value="Nova" icon="ui-icon-document"
+						action="#{gestaoPensoesBean.prepararNovoCadastro}"
+						process="@this" 
+						update="empresa-dialog"
+						oncomplete="PF('edicaoEmpresaDialog').show()" >
+						
+						<!-- Limpa cache de todos os componente  -->
+						<p:resetInput target="empresa-dialog"></p:resetInput>
+					</p:commandButton>
+					
+					<span class="ui-separator">
+						<span class="ui-icon ui-icon-grip-dotted-vertical" />
+            		</span>
+            		
+            		
+            		
+            		<!-- EDITAR -->
+            		<!-- Os botoes abaixo são desabilitados qd nenhuma linha está selecionada -->
+            		<p:commandButton icon="ui-icon-pencil" title="Editar"  id="btn-edit"
+	            			process="@this" update="empresa-dialog"
+	            			oncomplete="PF('edicaoEmpresaDialog').show()" 
+	            			disabled="#{gestaoPensoesBean.empresaSelected == null}" >
+            			<p:resetInput target="empresa-dialog" />
+            			<!-- Digo que: pega o valor do value e atribua ao target -->
+            			<f:setPropertyActionListener value="#{gestaoPensoesBean.empresaSelected}" 
+            										target="#{gestaoPensoesBean.empresaEdition}" />
+            		</p:commandButton>
+            		
+            		
+            		<!-- EXCLUIR -->
+            		<p:commandButton icon="ui-icon-trash" title="Excluir" disabled="#{gestaoPensoesBean.empresaSelected == null}" id="btn-delete"
+            				process="@this" update="empresas-table msgs toolbar"  
+            				action="#{gestaoPensoesBean.excluir}" >
+            		
+            			<p:confirm icon="ui-icon-alert" header="Confirmação de exclusão"
+            				message="Deseja realmente excluir a Empresa? "/>
+            		
+            		</p:commandButton>
+            		
+            		
+            		<!-- Exportar para o excel -->
+            		<p:commandButton icon="ui-icon-arrowthick-1-s" title="Exportar para XLS" 
+            			process="@this" ajax="false" immediate="true">
+            			<p:dataExporter type="xls" target="empresas-table" fileName="empresas" />
+            		</p:commandButton>
+				
+					<!-- Exportar para o PDF -->
+            		<p:commandButton icon="ui-icon-document" title="Exportar para PDF" 
+            			process="@this" ajax="false" immediate="true">
+            			<p:dataExporter type="pdf" target="empresas-table" fileName="empresas" />
+            		</p:commandButton>
+				
+						
+				
+				</f:facet>
+			</p:toolbar>
+			
+			
+			
+			
+			<!-- selection é a linha selecionada, para onde ele vai jogar -->
+			<p:dataTable value="#{gestaoPensoesBean.todasEmpresas}" var="empresa"
+					emptyMessage="Nenhuma empresa cadastrada." rows="10"  
+					paginator="true" paginatorPosition="bottom" 
+					style="margin-top: 10px; width: 70%;"
+					id="empresas-table"
+					selection="#{gestaoPensoesBean.empresaSelected}"
+					selectionMode="single" 
+					rowKey="#{empresa.id}" >
+					
+				<!-- Evento que starta qd uma linha é selecionada, ou seja, ele dispara uma requisicao ajax-->	
+				<p:ajax event="rowSelect" update=":frm:toolbar"/>   <!-- Especificando assim, ele procura pelo form primeiro, depois toolbar -->
+				
+				<!-- Evento q starta qd uma linha eh des-selecionada -->
+				<p:ajax event="rowUnselect" update=":frm:toolbar"/> 
+					
+					
+				<p:column headerText="Razão social" sortBy="#{empresa.razaoSocial}" > <!-- A tag sortBy é por onde ele vai ordenar, deve estar dentro do <form/> -->
+					<h:outputText value="#{empresa.razaoSocial}" />
+				</p:column>
+				<p:column headerText="Nome fantasia" width="250">
+					<h:outputText value="#{empresa.nomeFantasia}" />
+				</p:column>
+				<p:column headerText="CNPJ" width="160" style="text-align: center" >
+					<h:outputText value="#{empresa.cnpj}" />
+				</p:column>
+				
+				<p:column headerText="Data Fundação" width="160" style="text-align: center" >
+					<h:outputText value="#{empresa.dataFundacao}" >
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
+				
+				
+			</p:dataTable>
+			
+		
+		
+		
+		
+		
+		
+		<p:dialog header="Nova empresa" widgetVar="edicaoEmpresaDialog" id="empresa-dialog"  resizable="false" modal="true" closeOnEscape="true" draggable="true" >
+			<p:messages id="msgs-dialog"/>
+			
+			<!-- se eu apertar o Enter dentro do Dialog (empresa-dialog), o button q ele vai chamar eh o salvar-button -->
+			<p:defaultCommand target="salvar-button" scope="empresa-dialog"/>
+				
+			<h:panelGrid columns="2" id="painel-dialog" >
+			
+				<p:outputLabel value="Nome fantasia" for="nome-fantasia"/>
+				<p:inputText id="nome-fantasia" size="60" maxlength="80" value="#{gestaoPensoesBean.empresaEdition.nomeFantasia}"/>
+				
+				<p:outputLabel value="Razão Social" for="razao-social"/>
+				<p:inputText id="razao-social" size="60" maxlength="120" value="#{gestaoPensoesBean.empresaEdition.razaoSocial}"/>
+				
+				<p:outputLabel value="CNPJ" for="cnpj"/>
+				<p:inputMask id="cnpj" size="18" maxlength="18" value="#{gestaoPensoesBean.empresaEdition.cnpj}"
+						mask="99.999.999/9999-99"/>
+			
+				<p:outputLabel value="Data Fundação" for="data-fundacao"/>
+				<p:calendar id="data-fundacao" size="10" maxlength="10" value="#{gestaoPensoesBean.empresaEdition.dataFundacao}" 
+					pattern="dd/MM/yyyy" mask="99/99/9999"/>
+				
+				
+				<p:outputLabel value="Tipo" for="tipo"/>
+				<p:selectOneMenu id="tipo" value="#{gestaoPensoesBean.empresaEdition.tipo}">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{gestaoPensoesBean.tiposEmpresas}" var="tipo" itemLabel="#{tipo.descricao}" itemValue="#{tipo}" />
+				</p:selectOneMenu>
+				
+				
+				<!-- 
+					process: O comando abaixo processa somente o p:dialog, isso foi especificado na tag "process" passando o dia do p:dialog 
+					oncomplete: Está com um javascript do Primefaces para fechar o p:dialog
+					update: atualiza a tabela depois de ter completado a acao (salvar)
+				-->
+				<p:outputLabel />
+				<p:commandButton value="Salvar" id="salvar-button"
+					action="#{gestaoPensoesBean.salvar}"
+					process="empresa-dialog"
+					update="msgs-dialog painel-dialog"	    
+					oncomplete="if (!args.validationFailed) { PF('edicaoEmpresaDialog').hide();}" />
+				
+			</h:panelGrid>	
+				
+		</p:dialog>
+		
+		</h:form>
+	
+	</ui:define>
+</ui:composition>

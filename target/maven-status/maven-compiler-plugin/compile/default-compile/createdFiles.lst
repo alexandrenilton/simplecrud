@@ -1,0 +1,4 @@
+br\com\simplecrud\controller\GestaoPensoesBean.class
+br\com\simplecrud\dao\Conexao.class
+br\com\simplecrud\dao\PensaoDao.class
+br\com\simplecrud\model\Pensao.class
