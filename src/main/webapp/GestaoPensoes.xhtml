@@ -8,7 +8,12 @@
 	
 	<ui:define name="script">
 		<script>
-			//aqui vão os scripts que editamos
+		function handlerPDialogCreateEnterprise(){
+			alert('Teste');
+			if (!args.validationFailed) { 
+				PF('edicaoPensaoDialog').hide();
+			}
+		}
 		</script>
 	</ui:define>
 	
@@ -30,6 +35,7 @@
 			<p:toolbar id="toolbar">
 				<!--  -->	
 				<f:facet name="left">
+					
 					<!--process: Está como @this para processar somente esse componente (p:commandButton).
 						oncomplete: Assim que o processamento do componente é feito ele chama um JS do primefaces para mostrar o p:dialog pelo ID
 						update: Atualizar o dialog, no prepararNovoCadastro vc fez a instancia de uma empresa nova (limpa) dai vc força a atualizacao
@@ -56,7 +62,7 @@
 	            			process="@this" update="pensao-dialog"
 	            			oncomplete="PF('edicaoPensaoDialog').show()" 
 	            			disabled="#{gestaoPensoesBean.pensaoSelected == null}" >
-            			<p:resetInput target="empresa-dialog" />
+            			<p:resetInput target="pensao-dialog" />
             			<!-- Digo que: pega o valor do value e atribua ao target -->
             			<f:setPropertyActionListener value="#{gestaoPensoesBean.pensaoSelected}" 
             										target="#{gestaoPensoesBean.pensaoEdition}" />
@@ -72,7 +78,6 @@
             				message="Deseja realmente excluir a Pensão? "/>
             		
             		</p:commandButton>
-            		
             		
             		<!-- Exportar para o excel -->
             		<p:commandButton icon="ui-icon-arrowthick-1-s" title="Exportar para XLS" 
@@ -96,31 +101,34 @@
 			
 			<!-- selection é a linha selecionada, para onde ele vai jogar -->
 			<p:dataTable value="#{gestaoPensoesBean.todasPensoes}" var="pensao"
-					emptyMessage="Nenhuma pensão cadastrada! Continue usando preservativo!" rows="10"  
+					emptyMessage="Nenhuma pensão cadastrada! Continue usando preservativo!" rows="20"  
 					paginator="true" paginatorPosition="bottom" 
 					style="margin-top: 10px; width: 70%;"
-					id="pensoes-table" >
-					
-					<!--    
-					selectionMode="single"
+					id="pensoes-table" 
 					selection="#{gestaoPensoesBean.pensaoSelected}"
-					rowKey="#{pensao.id}">
-					--> 
+					selectionMode="single"
+					rowKey="#{pensao.id}" >
+		
 					
 				<!-- Evento que starta qd uma linha é selecionada, ou seja, ele dispara uma requisicao ajax-->	
-				<p:ajax event="rowSelect" update=":frm:toolbar"/>   <!-- Especificando assim, ele procura pelo form primeiro, depois toolbar -->
+				<p:ajax event="rowSelect" listener="#{gestaoPensoesBean.selecionarRow}" update=":frm:toolbar"/>   <!-- Especificando assim, ele procura pelo form primeiro, depois toolbar -->
 				
 				<!-- Evento q starta qd uma linha eh des-selecionada -->
 				<p:ajax event="rowUnselect" update=":frm:toolbar"/> 
+				
+				
+				<p:column headerText="rowKey" sortBy="#{pensao.id}" width="10%"> <!-- A tag sortBy é por onde ele vai ordenar, deve estar dentro do <form/> -->
+					<h:outputText value="#{pensao.id}" />
+				</p:column>
 					
 					
-				<p:column headerText="Nome da Mãe" sortBy="#{pensao.nomeMulher}" > <!-- A tag sortBy é por onde ele vai ordenar, deve estar dentro do <form/> -->
+				<p:column headerText="Nome da Mãe" sortBy="#{pensao.nomeMulher}" width="35%"> <!-- A tag sortBy é por onde ele vai ordenar, deve estar dentro do <form/> -->
 					<h:outputText value="#{pensao.nomeMulher}" />
 				</p:column>
-				<p:column headerText="Nome do menino(a)" width="250">
+				<p:column headerText="Nome do menino(a)" width="35%">
 					<h:outputText value="#{pensao.nomeFilho}" />
 				</p:column>
-				<p:column headerText="Valor da Pensão" width="160" style="text-align: center" >
+				<p:column headerText="Valor da Pensão" width="20%" style="text-align: center" >
 					<h:outputText value="#{pensao.valorPensao}" >
 						<!-- Faz com que o numero fique: R$ 1.000,00 -->
 						<f:convertNumber type="currency" currencyCode="BRL" minFractionDigits="2" maxFractionDigits="2" locale="pt-BR"/>
@@ -129,7 +137,9 @@
 			</p:dataTable>
 			
 		
-		
+		<!--  -->
+		<!-- Caixa de dialogo que se abre quando uma nova pensão é requisitada para ser adicionada -->
+		<!--  -->
 		<p:dialog header="Nova pensão (danouu-se)" widgetVar="edicaoPensaoDialog" id="pensao-dialog"  resizable="false" modal="true" closeOnEscape="true" draggable="true" >
 			<p:messages id="msgs-dialog"/>
 			
@@ -157,7 +167,7 @@
 				<p:commandButton value="Salvar" id="salvar-button"
 					action="#{gestaoPensoesBean.salvar}"
 					process="pensao-dialog"
-					update="msgs-dialog painel-dialog"	    
+					update="msgs-dialog painel-dialog"
 					oncomplete="if (!args.validationFailed) { PF('edicaoPensaoDialog').hide();}" />
 				
 			</h:panelGrid>	

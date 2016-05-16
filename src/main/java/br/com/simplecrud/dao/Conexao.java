@@ -56,7 +56,7 @@ public class Conexao {
     public static Connection obterConexao(int codBanco) throws ClassNotFoundException{
         String url = "jdbc:mysql://localhost:3306/"+BANCO_STR;
         String user = "root";
-        String pass = "c5j2a8i4";
+        String pass = "root";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");

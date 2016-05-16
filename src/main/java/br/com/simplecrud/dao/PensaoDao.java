@@ -56,6 +56,23 @@ public class PensaoDao implements Serializable {
 	}	
 	
 	
+	public boolean excluir(Long id){
+		try{
+			Connection conn = Conexao.obterConexao();
+			PreparedStatement pstmt = conn.prepareStatement(SQL_DELETA_PENSAO);
+			
+			pstmt.setLong(1, id);
+			
+			int result = pstmt.executeUpdate();
+			
+			return true;
+			
+		} catch(Exception ex){
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
 	public boolean cadastrar(Pensao pensao){	
 		
 		boolean existeErro = false;

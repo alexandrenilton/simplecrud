@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="br.com.treinamento.simplecrud.AppTest" time="0.003" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="br.com.treinamento.simplecrud.AppTest" time="0.002" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Install\Java\jdk1.8.0_40\jre\bin"/>
     <property name="java.vm.version" value="25.40-b25"/>
     <property name="user.country.format" value="BR"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="D:\developer\aulasJava\simplecrud"/>
+    <property name="maven.multiModuleProjectDirectory" value="D:\developer\Code\workspace_mars\git\simplecrud\simplecrud"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="Service Pack 1"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="D:\developer\aulasJava\simplecrud"/>
+    <property name="user.dir" value="D:\developer\Code\workspace_mars\git\simplecrud\simplecrud"/>
     <property name="java.runtime.version" value="1.8.0_40-b26"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Install\Java\jdk1.8.0_40\jre\lib\endorsed"/>
@@ -28,7 +28,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 7"/>
-    <property name="classworlds.conf" value="D:\developer\Code\workspace_mars\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf2908694400063471998.tmp"/>
+    <property name="classworlds.conf" value="D:\developer\Code\workspace_mars\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf8901320395633155999.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Install\Java\jdk1.8.0_40\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_66/bin/server;C:/Program Files/Java/jre1.8.0_66/bin;C:/Program Files/Java/jre1.8.0_66/lib/amd64;C:\Program Files (x86)\Common Files\CadSoft Shared\;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x64;C:\Program Files\Java\jdk1.7.0_17\bin;C:\Program Files\TortoiseSVN\bin;C:\Program Files\TortoiseGit\bin;C:\Program Files\TortoiseHg\;C:\Program Files (x86)\Skype\Phone\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Developer\nodejs\;C:\Developer\Git\cmd;C:\Developer\Git\mingw64\bin;C:\Developer\Git\usr\bin;C:\Python27\;C:\Python27\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x64;$JAVA_HOME%\bin;C:\Users\notebook\AppData\Roaming\Python\Scripts;C:\Program Files (x86)\Python27;D:\developer\apache-maven-2.2.0-bin\apache-maven-2.2.0\bin;C:\Users\notebook\AppData\Roaming\npm;C:\MongoDB\Server\3.2\bin;C:\msysgit\msysgit\bin;D:\developer\Eclipse_mars\eclipse;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -41,7 +41,7 @@
     <property name="java.specification.version" value="1.8"/>
     <property name="file.encoding" value="Cp1252"/>
     <property name="user.name" value="notebook"/>
-    <property name="java.class.path" value="/D:/developer/Eclipse_mars/eclipse/plugins/org.eclipse.m2e.maven.runtime_1.6.2.20150902-0001/jars/plexus-classworlds-2.5.2.jar"/>
+    <property name="java.class.path" value="/D:/developer/Eclipse_mars/eclipse/plugins/org.eclipse.m2e.maven.runtime_1.6.3.20160209-1444/jars/plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Install\Java\jdk1.8.0_40\jre"/>
@@ -55,7 +55,7 @@
     <property name="java.ext.dirs" value="C:\Install\Java\jdk1.8.0_40\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
     <property name="sun.boot.class.path" value="C:\Install\Java\jdk1.8.0_40\jre\lib\resources.jar;C:\Install\Java\jdk1.8.0_40\jre\lib\rt.jar;C:\Install\Java\jdk1.8.0_40\jre\lib\sunrsasign.jar;C:\Install\Java\jdk1.8.0_40\jre\lib\jsse.jar;C:\Install\Java\jdk1.8.0_40\jre\lib\jce.jar;C:\Install\Java\jdk1.8.0_40\jre\lib\charsets.jar;C:\Install\Java\jdk1.8.0_40\jre\lib\jfr.jar;C:\Install\Java\jdk1.8.0_40\jre\classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="D:\developer\aulasJava\simplecrud\EMBEDDED"/>
+    <property name="maven.home" value="D:\developer\Code\workspace_mars\git\simplecrud\simplecrud\EMBEDDED"/>
     <property name="file.separator" value="\"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -63,5 +63,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="br.com.treinamento.simplecrud.AppTest" name="testApp" time="0.003"/>
+  <testcase classname="br.com.treinamento.simplecrud.AppTest" name="testApp" time="0.002"/>
 </testsuite>

@@ -54,19 +54,22 @@
 			<scope>compile</scope>
 		</dependency>
 
-
+		
 		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-api</artifactId>
-			<version>2.2.13</version>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.faces</artifactId>
+			<version>2.2.8-02</version>
+			<scope>compile</scope>
 		</dependency>
-
+		
 		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-impl</artifactId>
-			<version>2.2.13</version>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet</artifactId>
+			<version>2.2.1.Final</version>
+			<scope>compile</scope>
 		</dependency>
-
+		
+		
 		<!-- Lib do glassfish para utilizar os Inject and Named -->
 		<!-- <dependency> <groupId>org.glassfish</groupId> <artifactId>javax.faces</artifactId> 
 			<version>2.2.8-02</version> <scope>compile</scope> </dependency> <dependency> 
